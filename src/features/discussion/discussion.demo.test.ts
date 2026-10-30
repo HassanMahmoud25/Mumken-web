@@ -58,9 +58,9 @@ describe("browser demo scenarios through the real repository", () => {
     await expect(fresh.createComment(input)).rejects.toThrow("DEMO_REQUEST_FAILED");
   });
 
-  it("holds the initial skeleton and valid operations for four seconds in slow mode", async () => {
+  it.each(["development", "production"])("holds the initial skeleton and valid operations for four seconds in %s slow mode", async environment => {
     vi.useFakeTimers();
-    const repository = selectDemo("loading");
+    const repository = selectDemo("loading", environment);
     let loaded = false;
     const initial = repository.loadInitialData().then(() => { loaded = true; });
     await vi.advanceTimersByTimeAsync(3999);
@@ -77,9 +77,21 @@ describe("browser demo scenarios through the real repository", () => {
     await submission;
   });
 
-  it.each(["loading", "initial-error", "load-error", "submit-error"])("ignores ?demo=%s completely in production", async mode => {
+  it.each(["initial", "load", "submit"] as const)("supports the explicit %s-error scenario in production", async operation => {
+    const repository = selectDemo(`${operation}-error`, "production");
+    const request = () => operation === "initial"
+      ? repository.loadInitialData()
+      : operation === "load"
+        ? repository.loadRecord("record-001")
+        : repository.createComment(input);
+    await expect(request()).rejects.toThrow("DEMO_REQUEST_FAILED");
+    await request();
+  });
+
+  it("keeps production requests immediate without a demo query", async () => {
     vi.useFakeTimers();
-    const repository = selectDemo(mode, "production");
+    vi.stubEnv("NODE_ENV", "production");
+    const repository = createDiscussionRepository();
     await repository.loadInitialData();
     await repository.loadRecord("record-001");
     await repository.createComment(input);

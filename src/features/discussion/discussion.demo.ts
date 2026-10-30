@@ -4,14 +4,14 @@ type Operation = "initial" | "load" | "submit";
 
 /** URL-selected scenarios use the real repository and reset on a full refresh.
  * Read lazily on the first request, after hydration, and retain the choice when
- * client-side navigation drops the query string. Never enable this in production. */
+ * client-side navigation drops the query string. Explicit demo URLs also work in production. */
 export function createDemoRequestSimulator() {
   let mode: string | null | undefined;
   let failed = false;
 
   return async (operation: Operation) => {
     if (mode === undefined) {
-      mode = process.env.NODE_ENV === "development" && typeof window !== "undefined"
+      mode = typeof window !== "undefined"
         ? new URLSearchParams(window.location.search).get("demo")
         : null;
     }
