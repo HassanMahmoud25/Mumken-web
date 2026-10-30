@@ -1,9 +1,9 @@
-/** Demo latency stays in the data layer and is disabled in production and tests. */
+/** Sample-data latency is identical in development and production; tests opt out. */
 export function getInitialLoadDelay(
   environment: string | undefined,
   configured: string | undefined,
 ): number {
-  if (environment !== "development") return 0;
+  if (environment === "test") return 0;
   if (configured === undefined || configured.trim() === "") return 1200;
   const milliseconds = Number(configured);
   return Number.isFinite(milliseconds) && milliseconds >= 0

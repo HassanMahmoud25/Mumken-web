@@ -51,4 +51,4 @@ Open these paths on localhost or the deployed Vercel site:
 | Unavailable record          | `/records/missing`                                                                           |
 | Successful comment or reply | `/records/record-001` — enter text and post                                                  |
 
-Open each URL with a full page reload. Simulated failures happen once per session; refresh to repeat. Explicit `?demo=...` scenarios work in development and production. Without a demo query, production requests have no artificial delay. Use the language button to try the same flows in Arabic.
+Open each URL with a full page reload. Simulated failures happen once per session; refresh to repeat. Explicit `?demo=...` scenarios work in development and production. Without a demo query, development and production both simulate the first opening of each discussion and comment/reply submissions for 1.2 seconds by default. Initial list loading is immediate unless `?demo=loading` is selected. `NEXT_PUBLIC_INITIAL_LOAD_DELAY_MS` configures this delay at build time (0 disables it, maximum 2000 ms). Use the language button to try the same flows in Arabic.

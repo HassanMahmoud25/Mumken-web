@@ -88,14 +88,20 @@ describe("browser demo scenarios through the real repository", () => {
     await request();
   });
 
-  it("keeps production requests immediate without a demo query", async () => {
+  it("simulates discussion loading and submission in production without a demo query", async () => {
     vi.useFakeTimers();
     vi.stubEnv("NODE_ENV", "production");
     const repository = createDiscussionRepository();
     await repository.loadInitialData();
-    await repository.loadRecord("record-001");
-    await repository.createComment(input);
+    const detail = repository.loadRecord("record-001");
+    expect(vi.getTimerCount()).toBe(1);
+    await vi.advanceTimersByTimeAsync(1200);
+    await detail;
     expect(vi.getTimerCount()).toBe(0);
+    const submission = repository.createComment(input);
+    expect(vi.getTimerCount()).toBe(1);
+    await vi.advanceTimersByTimeAsync(1200);
+    await submission;
   });
 
   it("ignores unrecognised demo values", async () => {
