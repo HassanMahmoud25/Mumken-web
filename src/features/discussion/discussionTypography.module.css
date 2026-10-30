@@ -1,0 +1,47 @@
+/* Only Arabic glyphs use this face; Latin keeps the existing Arial metrics. */
+@font-face {
+  font-family: "Cairo";
+  src: url("/fonts/Cairo-Arabic.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-089F, U+08A0-08FF,
+    U+FB50-FDFF, U+FE70-FEFF;
+}
+
+.discussion,
+.record {
+  font-family: "Cairo", Arial, "Noto Sans Arabic", "Segoe UI", sans-serif;
+}
+
+/* Do not track connected Arabic letters or change English text metrics. */
+.discussion:lang(ar),
+.record:lang(ar) {
+  letter-spacing: normal;
+}
+
+.body[data-arabic="true"],
+.discussion textarea[data-arabic="true"] {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  letter-spacing: normal;
+}
+
+.body {
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+
+.author[data-arabic="true"] {
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+
+.discussion time:lang(ar) {
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: normal;
+}

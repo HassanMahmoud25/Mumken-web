@@ -1,0 +1,255 @@
+{
+  "currentUser": {
+    "id": "user-001",
+    "name": "Noura Alharbi",
+    "initials": "NA"
+  },
+  "records": [
+    {
+      "id": "record-001",
+      "title": {
+        "en": "Expanding digital services for small businesses",
+        "ar": "توسيع الخدمات الرقمية للمنشآت الصغيرة"
+      },
+      "summary": {
+        "en": "A new initiative will help small businesses adopt digital tools, improve their online presence and access supporting services.",
+        "ar": "تهدف مبادرة جديدة إلى مساعدة المنشآت الصغيرة على تبني الأدوات الرقمية وتحسين حضورها الإلكتروني والوصول إلى الخدمات الداعمة."
+      },
+      "source": "Business Update",
+      "publishedAt": "2026-10-24T08:30:00Z"
+    },
+    {
+      "id": "record-002",
+      "title": {
+        "en": "Public consultation on urban mobility",
+        "ar": "استطلاع عام حول التنقل الحضري"
+      },
+      "summary": {
+        "en": "Residents are invited to share feedback on proposed improvements to public transport and pedestrian routes.",
+        "ar": "تتم دعوة السكان لمشاركة آرائهم حول التحسينات المقترحة للنقل العام ومسارات المشاة."
+      },
+      "source": "Community Bulletin",
+      "publishedAt": "2026-10-25T12:00:00Z"
+    },
+    {
+      "id": "record-003",
+      "title": {
+        "en": "Community workshops on digital skills",
+        "ar": "ورش مجتمعية للمهارات الرقمية"
+      },
+      "summary": {
+        "en": "Local learning centres will offer practical workshops on online services, digital safety and everyday productivity.",
+        "ar": "ستقدم مراكز التعلم المحلية ورشًا عملية حول الخدمات الإلكترونية والسلامة الرقمية والإنتاجية اليومية."
+      },
+      "source": "Learning Bulletin",
+      "publishedAt": "2026-10-26T08:00:00Z"
+    },
+    {
+      "id": "record-004",
+      "title": {
+        "en": "Improving neighbourhood green spaces",
+        "ar": "تحسين المساحات الخضراء في الأحياء"
+      },
+      "summary": {
+        "en": "A pilot programme invites residents to help prioritise shade, accessible paths and seating in neighbourhood parks.",
+        "ar": "يدعو برنامج تجريبي السكان إلى تحديد أولويات الظل والممرات الميسرة ومقاعد الجلوس في حدائق الأحياء."
+      },
+      "source": "Community Bulletin",
+      "publishedAt": "2026-10-27T08:00:00Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "user-001",
+      "name": "Noura Alharbi",
+      "initials": "NA"
+    },
+    {
+      "id": "user-002",
+      "name": "Omar Saleh",
+      "initials": "OS"
+    },
+    {
+      "id": "user-003",
+      "name": "Lina Haddad",
+      "initials": "LH"
+    },
+    {
+      "id": "user-004",
+      "name": "Fahad Alqahtani",
+      "initials": "FA"
+    }
+  ],
+  "comments": [
+    {
+      "id": "comment-001",
+      "recordId": "record-001",
+      "parentId": null,
+      "authorId": "user-002",
+      "body": "This could make a meaningful difference if the onboarding process stays simple for smaller teams. A short setup checklist, clear eligibility requirements and a way to save progress would make it easier for owners who manage everything themselves. I would also like to see the first phase tested with businesses that have limited technical experience, so the service reflects their everyday needs rather than only those of larger organisations.",
+      "language": "en",
+      "createdAt": "2026-10-24T09:15:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-002",
+      "recordId": "record-001",
+      "parentId": "comment-001",
+      "authorId": "user-003",
+      "body": "Agreed. Clear guidance and accessible support will be just as important as the tools themselves. Step-by-step examples should explain what documents are needed, how long each stage usually takes and where to ask for help if something goes wrong. A simple support channel and a clear explanation of common errors could prevent people from abandoning an application halfway through, especially when they are using the service for the first time.",
+      "language": "en",
+      "createdAt": "2026-10-24T09:42:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-003",
+      "recordId": "record-001",
+      "parentId": null,
+      "authorId": "user-004",
+      "body": "من المهم أن تشمل المبادرة المنشآت خارج المدن الرئيسية وأن تكون المواد الإرشادية متاحة باللغة العربية. كثير من أصحاب هذه المنشآت يعملون بفرق صغيرة ولا يملكون وقتًا كافيًا لتجربة أنظمة معقدة، لذلك سيكون من المفيد تقديم أمثلة عملية وخطوات واضحة لكل خدمة. وأقترح إشراك منشآت من مناطق مختلفة في المرحلة التجريبية، وجمع ملاحظاتها حول سهولة التسجيل ووضوح المتطلبات وسرعة الحصول على المساعدة قبل توسيع نطاق المبادرة.",
+      "language": "ar",
+      "createdAt": "2026-10-24T10:05:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-004",
+      "recordId": "record-001",
+      "parentId": "comment-003",
+      "authorId": "user-001",
+      "body": "أتفق، كما أن توفير قنوات دعم متعددة سيساعد المنشآت التي تختلف احتياجاتها وخبراتها التقنية. من الأفضل أن تتوفر المساعدة عبر الهاتف والمحادثة والمواد التعليمية المختصرة، مع توضيح أوقات الاستجابة وطريقة متابعة الطلبات. ويمكن أيضًا إعداد دليل للأسئلة الشائعة يتضمن حالات واقعية، مثل تعديل بيانات المنشأة أو استكمال مستند ناقص، حتى يتمكن صاحب العمل من متابعة الإجراءات بثقة دون الحاجة إلى تكرار الخطوات أو البحث في أكثر من مكان.",
+      "language": "ar",
+      "createdAt": "2026-10-24T10:28:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-005",
+      "recordId": "record-001",
+      "parentId": null,
+      "authorId": "user-003",
+      "body": "It would be useful to publish measurable outcomes after the first phase, including adoption and retention rather than registrations alone. A public summary could show how many businesses completed their first transaction, where users encountered difficulties and whether support requests were resolved promptly. Breaking the results down by business size and location would help explain who is benefiting and which parts of the experience need more attention before the next rollout.",
+      "language": "en",
+      "createdAt": "2026-10-24T11:10:00Z",
+      "updatedAt": "2026-10-24T11:18:00Z"
+    },
+    {
+      "id": "comment-006",
+      "recordId": "record-003",
+      "parentId": null,
+      "authorId": "user-001",
+      "body": "Evening sessions would help people who work during the day. Many participants will need to fit learning around their jobs and family commitments, so offering the same workshop at more than one time would make a real difference. It would also help to publish the schedule early, include a realistic estimate of each session’s length and let people choose a later session if their plans change.",
+      "language": "en",
+      "createdAt": "2026-10-26T09:15:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-007",
+      "recordId": "record-003",
+      "parentId": null,
+      "authorId": "user-002",
+      "body": "يمكن توفير جلسات في نهاية الأسبوع أيضًا. هذا الخيار سيساعد الموظفين وأولياء الأمور على المشاركة دون تعارض مع التزاماتهم اليومية. ومن المفيد الإعلان عن المواعيد قبل وقت كافٍ، مع توضيح مستوى كل ورشة وما إذا كانت تتطلب معرفة سابقة أو إحضار جهاز شخصي. كما أقترح تخصيص وقت للأسئلة والتطبيق العملي حتى يتمكن المشاركون من تجربة المهارات بأنفسهم والحصول على المساعدة عند الحاجة.",
+      "language": "ar",
+      "createdAt": "2026-10-26T10:15:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-008",
+      "recordId": "record-003",
+      "parentId": null,
+      "authorId": "user-003",
+      "body": "Will the materials be available after each workshop? Having a clear set of notes, exercises and useful links would make it much easier to revisit the steps later, particularly for participants who are trying these tools for the first time. Please consider providing an accessible digital copy as well as a printable version, and explain how participants can ask follow-up questions once the session has ended.",
+      "language": "en",
+      "createdAt": "2026-10-26T11:15:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-009",
+      "recordId": "record-003",
+      "parentId": "comment-008",
+      "authorId": "user-004",
+      "body": "A short printed guide would help participants practise at home. It could follow the same order as the workshop, with screenshots, a small exercise for each topic and space for personal notes. Keeping the language simple and adding a troubleshooting page would help people build confidence without having to remember every instruction from the session. A digital version would also be useful for anyone who prefers larger text.",
+      "language": "en",
+      "createdAt": "2026-10-26T12:15:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-010",
+      "recordId": "record-003",
+      "parentId": "comment-008",
+      "authorId": "user-001",
+      "body": "Please include examples of recognising suspicious messages. It would be useful to compare a legitimate message with a suspicious one and explain the warning signs in plain language. Participants should also get a chance to practise checking a link, deciding when to contact the organisation directly and reporting a message safely. Including a few familiar everyday situations would make those lessons easier to remember.",
+      "language": "en",
+      "createdAt": "2026-10-26T13:15:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-011",
+      "recordId": "record-003",
+      "parentId": null,
+      "authorId": "user-002",
+      "body": "Agreed, practical examples would be useful. Rather than covering too many features at once, each workshop could take participants through one complete everyday task, such as booking an appointment or sharing a document securely. A little time to repeat the task independently, with someone available to answer questions, would help people leave with a skill they can actually use.",
+      "language": "en",
+      "createdAt": "2026-10-26T14:15:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-012",
+      "recordId": "record-004",
+      "parentId": null,
+      "authorId": "user-001",
+      "body": "Accessible paths should connect the entrances to shaded seating. The surfaces should be even, wide enough for people to pass comfortably and easy to follow without steps or sudden changes in level. It would be helpful to review the routes during different times of day, because a path that feels comfortable in the morning may have very little shade in the afternoon. Rest points along longer routes would also improve the experience.",
+      "language": "en",
+      "createdAt": "2026-10-27T09:15:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-013",
+      "recordId": "record-004",
+      "parentId": "comment-012",
+      "authorId": "user-002",
+      "body": "من المهم توفير مقاعد قريبة من مناطق لعب الأطفال. وجود هذه المقاعد في أماكن مظللة وبمسافة مناسبة من مسارات الحركة سيساعد الأسر على متابعة الأطفال والجلوس براحة لفترات أطول. وأتمنى مراعاة احتياجات كبار السن ومستخدمي الكراسي المتحركة، مع ترك مساحة كافية بجانب المقاعد وتوفير طريق واضح يصل إليها من المداخل. من المفيد أيضًا اختبار مواقع الجلوس في أوقات مختلفة لمعرفة مدى توفر الظل فعليًا.",
+      "language": "ar",
+      "createdAt": "2026-10-27T10:15:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-014",
+      "recordId": "record-004",
+      "parentId": null,
+      "authorId": "user-003",
+      "body": "Could residents review the proposed locations before work begins? A simple map showing the entrances, proposed seating, shaded areas and accessible paths would make the plans easier to discuss. Residents could then point out places that are difficult to reach or already become crowded, and the project team could explain which suggestions can be included in the first phase and which may need further work.",
+      "language": "en",
+      "createdAt": "2026-10-27T11:15:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-015",
+      "recordId": "record-004",
+      "parentId": "comment-014",
+      "authorId": "user-004",
+      "body": "A short walk around the park would help identify the busiest routes. Visiting at a busy time and again during a quieter period could reveal how families, older residents and people walking through the neighbourhood use the space differently. The group could note uneven surfaces, missing shade and places where seating blocks movement, then share those observations alongside the proposed plan before locations are finalised.",
+      "language": "en",
+      "createdAt": "2026-10-27T12:15:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-016",
+      "recordId": "record-004",
+      "parentId": "comment-014",
+      "authorId": "user-001",
+      "body": "Good idea. Please include wheelchair users in that review. Their feedback could identify issues that are easy to miss on a drawing, such as tight turns, uneven transitions or seating areas without enough room alongside them. Parents with pushchairs and residents with limited mobility may have useful observations too. It would help to share the revised plan afterwards so participants can see how their comments influenced the decisions.",
+      "language": "en",
+      "createdAt": "2026-10-27T13:15:00Z",
+      "updatedAt": null
+    },
+    {
+      "id": "comment-017",
+      "recordId": "record-004",
+      "parentId": null,
+      "authorId": "user-002",
+      "body": "I would also welcome a clear maintenance schedule. New planting, paths and seating will only remain useful if there is a plan for watering, cleaning and repairs after the initial work is complete. Please make it clear who is responsible for each area and how residents can report a problem. A simple update on outstanding repairs would help people understand what has been reported and when they can expect it to be addressed.",
+      "language": "en",
+      "createdAt": "2026-10-27T14:15:00Z",
+      "updatedAt": null
+    }
+  ]
+}

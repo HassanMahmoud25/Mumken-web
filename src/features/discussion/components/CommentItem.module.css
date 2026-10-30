@@ -1,0 +1,26 @@
+/* Keep the state rules with the component that owns the toggle. The inner
+   wrapper clips content while its grid track shrinks to zero. */
+.thread {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    grid-template-rows 220ms ease,
+    opacity 220ms ease,
+    visibility 220ms;
+}
+.thread[data-expanded="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+}
+.content {
+  min-height: 0;
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .thread {
+    transition: none;
+  }
+}
