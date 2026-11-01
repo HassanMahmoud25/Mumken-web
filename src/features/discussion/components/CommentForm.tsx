@@ -45,6 +45,7 @@ export default function CommentForm({
   onClearError,
 }: CommentFormProps) {
   const errorId = useId();
+  const hintId = useId();
   const replyContextId = useId();
   const formRef = useRef<HTMLFormElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -72,6 +73,7 @@ export default function CommentForm({
 
     if (!trimmedBody) {
       setValidationError(true);
+      textareaRef.current?.focus();
       return;
     }
 
@@ -83,6 +85,7 @@ export default function CommentForm({
       succeeded = await onSubmit(trimmedBody);
     } finally {
       pending.current = false;
+      requestAnimationFrame(() => textareaRef.current?.focus({ preventScroll: true }));
     }
 
     if (succeeded) {
@@ -151,7 +154,7 @@ export default function CommentForm({
               replyingTo ? labels.replyPlaceholder : labels.commentPlaceholder
             }
             aria-invalid={Boolean(errorMessage)}
-            aria-describedby={errorMessage ? errorId : undefined}
+            aria-describedby={`${hintId}${errorMessage ? ` ${errorId}` : ""}`}
             maxLength={MAX_LENGTH}
             disabled={submitting}
             data-arabic={/\p{Script=Arabic}/u.test(body || (replyingTo ? labels.replyPlaceholder : labels.commentPlaceholder))}
@@ -160,7 +163,7 @@ export default function CommentForm({
           />
 
           <div className={discussionLayout.composerFooter}>
-            <p className="text-xs text-slate-500">
+            <p id={hintId} className="text-xs text-slate-500">
               {labels.characterHint}
               <span className="ms-2 tabular-nums">
                 {body.length}/{MAX_LENGTH}

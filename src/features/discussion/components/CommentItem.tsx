@@ -42,18 +42,19 @@ export default function CommentItem({
   submitting = false,
 }: CommentItemProps) {
   const threadId = useId();
+  const authorId = useId();
   const [hiddenReplyCount, setHiddenReplyCount] = useState<number | null>(null);
   // A newly inserted reply reveals its thread, even if it was previously collapsed.
   const repliesVisible = hiddenReplyCount !== replies.length;
 
   return (
-    <article data-comment-id={comment.id} className="discussion-enter min-w-0">
+    <article aria-labelledby={authorId} data-comment-id={comment.id} className="discussion-enter min-w-0">
       <div className="flex items-start gap-3">
         <Avatar initials={author.initials} name={author.name} />
 
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <bdi dir="auto" data-arabic={/\p{Script=Arabic}/u.test(author.name)} className={`${typography.author} text-sm font-semibold text-slate-900`}>
+            <bdi id={authorId} dir="auto" data-arabic={/\p{Script=Arabic}/u.test(author.name)} className={`${typography.author} text-sm font-semibold text-slate-900`}>
               {author.name}
             </bdi>
 
@@ -86,6 +87,7 @@ export default function CommentItem({
             {comment.parentId === null && (
               <Button
                 variant="ghost"
+                aria-label={`${labels.reply} — ${author.name}`}
                 className="min-h-8 px-2 py-1 text-xs"
                 disabled={submitting}
                 onClick={() => {
@@ -140,6 +142,8 @@ export default function CommentItem({
                   <div
                     key={reply.id}
                     data-comment-id={reply.id}
+                    role="article"
+                    aria-label={replyAuthor.name}
                     className={`${discussionLayout.replyCard} discussion-enter`}
                   >
                     <Avatar
