@@ -36,6 +36,25 @@ For a Webpack build, use `npm run build -- --webpack`.
 
 The app uses local sample data. Comments persist during the current session and reset on refresh.
 
+## Lighthouse results
+
+Lighthouse audits were run against the deployed Vercel site. The captured runs show the following scores:
+
+| Page | Performance | Accessibility | Best Practices | SEO |
+| --- | --- | --- | --- | --- |
+| `/records` | 100 | 100 | 100 | 100 |
+| `/records/record-003` | 100 | 100 | 100 | 100 |
+
+### Records list
+
+![Lighthouse results for /records: 100 in all four categories](docs/lighthouse/records.png)
+
+### Record details
+
+![Lighthouse results for /records/record-003: 100 in all four categories](docs/lighthouse/record-details.png)
+
+These screenshots document individual audit runs; scores can vary with test conditions. The screenshots do not include the device profile or throttling settings. Automated accessibility scores do not establish full accessibility conformance.
+
 ## Demo scenarios
 
 Open these paths on localhost or the deployed Vercel site:
