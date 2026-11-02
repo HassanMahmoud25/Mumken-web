@@ -1,12 +1,8 @@
 # Mumken Web
 
-A responsive discussion app for browsing updates, posting comments, and replying to other users. Supports English and Arabic with LTR and RTL layouts.
+A discussion app for reading updates, posting comments, and replying in English or Arabic. Built with Next.js 16, React 19, TypeScript, Tailwind CSS 4, and Vitest.
 
-## Stack
-
-Next.js 16, React 19, TypeScript, Tailwind CSS 4, and Vitest.
-
-## Run locally
+## Run
 
 Requires Node.js 20.9 or later.
 
@@ -17,6 +13,15 @@ npm run dev
 
 Open [localhost:3000](http://localhost:3000).
 
+For production:
+
+```sh
+npm run build
+npm start
+```
+
+If the environment prevents Turbopack from starting its local worker, use `npm run build -- --webpack`. The Webpack production build has been verified locally.
+
 ## Checks
 
 ```sh
@@ -25,102 +30,76 @@ npm run lint
 npx tsc --noEmit
 ```
 
-## Production
+## Features
 
-```sh
-npm run build
-npm start
-```
+- Update list and discussion pages, with one level of replies.
+- English/LTR and Arabic/RTL layouts on desktop and mobile browsers.
+- Empty-input validation, a 2,000-character limit, and duplicate-submission protection.
+- Failed submissions keep the draft for retry; successful posts show a green confirmation.
+- Loading, empty, unavailable, and error states. The list skeleton has four cards.
+- A startup overlay on first load or refresh, followed by the skeleton. It stays for at least 1.2 seconds and waits for the Arabic font, with a three-second fallback.
+- Collapsible replies, composer focus on Reply, keyboard focus styles, status announcements, and reduced-motion support.
 
-For a Webpack build, use `npm run build -- --webpack`.
+## Data and storage
 
-The app uses local sample data. Comments persist during the current session and reset on refresh.
-
-## Journey walkthrough
-
-The [English and Arabic walkthrough](docs/journey/README.md) documents the web journey from the startup overlay through loading, browsing, commenting, replying, recovery, and mobile-browser layouts. It complements the Loom recordings submitted with the assessment.
-
-The guide groups **19 screenshots into 10 stages**, with English and Arabic side by side and one shared startup image. It also includes reproduction steps, a manual verification checklist, and automated test results. Screenshots total less than 1 MB; they are kept in the guide so this README stays concise.
-
-<details>
-<summary>Preview: a successful discussion in English and Arabic</summary>
-
-| English | العربية |
+| Data | Lifetime |
 | --- | --- |
-| ![English discussion with a successful reply](docs/journey/07-reply-success-en.jpg) | ![Arabic discussion with a successful reply](docs/journey/07-reply-success-ar.jpg) |
+| Comments and replies | In memory across navigation; reset to the JSON seed on refresh. |
+| Language | Saved in `localStorage`; restored on later visits. If storage is blocked, it lasts for the current visit. |
+| Draft and reply target | Temporary form state; failed submissions retain both. |
 
-</details>
-
-## Lighthouse results
-
-Lighthouse audits were run against the deployed Vercel site. The captured runs show the following scores:
-
-| Page | Performance | Accessibility | Best Practices | SEO |
-| --- | --- | --- | --- | --- |
-| `/records` | 100 | 100 | 100 | 100 |
-| `/records/record-003` | 100 | 100 | 100 | 100 |
-
-### Records list
-
-![Lighthouse results for /records: 100 in all four categories](docs/lighthouse/records.png)
-
-### Record details
-
-![Lighthouse results for /records/record-003: 100 in all four categories](docs/lighthouse/record-details.png)
-
-These screenshots document individual audit runs captured before the latest startup overlay and submission-feedback changes; rerun Lighthouse to measure the current build. Scores can vary with test conditions. The screenshots do not include the device profile or throttling settings. Automated accessibility scores do not establish full accessibility conformance.
+There is no backend or authentication. The supplied current user is used for all submissions. Authored comments keep their original language. Timestamps are stored in UTC and displayed in the viewer's timezone.
 
 ## Demo scenarios
 
-Open these paths on localhost or the deployed Vercel site:
+Open each URL with a full reload. Failures happen once per session; retry succeeds. The demo URLs also work in production.
 
-| Scenario                    | Path / action                                                                                |
-| --------------------------- | -------------------------------------------------------------------------------------------- |
-| Initial loading shimmer     | `/records?demo=loading` — delays initial loading, discussion opening, and submission by four seconds                                           |
-| Initial load error          | `/records?demo=initial-error` — select **Try again** to recover                              |
-| Discussion load error       | `/records/record-001?demo=load-error` — select **Try again**                                 |
-| Comment submission error    | `/records/record-002?demo=submit-error` — post a comment, then retry with the retained draft |
-| Reply submission error      | `/records/record-001?demo=submit-error` — select **Reply**, post, then retry                 |
-| Empty discussion            | `/records/record-002`                                                                        |
-| Unavailable record          | `/records/missing`                                                                           |
-| Successful comment or reply | `/records/record-001` — enter text and post                                                  |
+| Scenario | URL |
+| --- | --- |
+| Four-second loading | `/records?demo=loading` |
+| Initial load failure | `/records?demo=initial-error` |
+| Discussion load failure | `/records/record-001?demo=load-error` |
+| Failed comment | `/records/record-002?demo=submit-error` |
+| Failed reply | `/records/record-001?demo=submit-error` — choose Reply first |
+| Empty discussion | `/records/record-002` |
+| Missing update | `/records/missing` |
 
-Open each URL with a full page reload. Simulated failures happen once per session; refresh to repeat. Explicit `?demo=...` scenarios work in development and production. Without a demo query, development and production both simulate the first opening of each discussion and comment/reply submissions for 1.2 seconds by default. Initial list data is retrieved immediately unless `?demo=loading` is selected; the startup overlay and skeleton handoff still run on a full page load. `NEXT_PUBLIC_INITIAL_LOAD_DELAY_MS` configures the simulated request delay at build time (0 disables it, maximum 2000 ms); it does not change the startup overlay timing. Use the language button to try the same flows in Arabic.
+Normal discussion loads and submissions simulate a 1.2-second delay. Initial list data loads immediately, while the startup overlay still runs. `NEXT_PUBLIC_INITIAL_LOAD_DELAY_MS` sets the request delay at build time (0–2,000 ms); it does not change the overlay timing.
 
-## Technical Decisions & Assumptions
+## Screenshots
 
-### Assessment scope and supplied inputs
+The [English and Arabic walkthrough](docs/journey/README.md) has 19 screenshots covering startup, the main journey, recovery, and mobile-browser layouts. It complements the submitted Loom recordings.
 
-- The PDF defined the assessment requirements; the supplied JSON provided the local seed data, and Figma provided the visual direction. The required journey covers browsing records, viewing a discussion, commenting, and one level of replies; no backend was required.
+<details>
+<summary>Successful discussion: English and Arabic</summary>
 
-### Design gaps and intentional interaction decisions
+| English | العربية |
+| --- | --- |
+| ![Successful reply in English](docs/journey/07-reply-success-en.jpg) | ![Successful reply in Arabic](docs/journey/07-reply-success-ar.jpg) |
 
-- **Missing records screen:** Figma supplied the discussion/details screen but omitted the `/records` listing. The listing was inferred from the PDF flow and multiple records in the JSON, using the same colors, typography, and visual language.
-- **Visual refinements:** Spacing, header/content alignment, clipped text, icons, and responsive behavior were refined to make the supplied direction consistent and readable.
-- **Motion:** Figma did not specify transitions or provide an interaction prototype. Subtle comment-entry and reply-disclosure animations were added for continuity, with reduced-motion support.
-- **Startup:** On a first visit or full refresh, a full-screen branded gradient overlay covers font and layout preparation for at least 1.2 seconds. It waits for the Arabic font, with a three-second fallback if font loading stalls. Its styles are scoped to the startup component. It fades into the existing skeleton for a 500 ms handoff before showing content; ongoing loading keeps the skeleton visible. Client-side navigation does not replay the overlay, and reduced-motion preferences are respected.
-- **Loading placeholders:** The `/records` skeleton shows four update cards, using the same responsive grid as the loaded list. Record details retain their existing record, composer, comment, and reply placeholders.
-- **Collapsible replies:** Show/Hide controls were added to avoid excessive scrolling through long threads. Threads start expanded; selecting Reply or adding a reply reveals the relevant thread.
-- **Shared composer:** Reply scrolls the existing composer into view and focuses it, avoiding an additional modal or inline editor. A “Replying to” bar identifies the author; Cancel returns to comment mode and keeps focus in the composer. This resolves reply behavior that was unspecified in the supplied design.
-- **Validation and recovery:** Whitespace-only input is rejected after trimming; text is limited to 2,000 characters. Concurrent submissions are blocked, comments appear only after success, and failures retain the draft for retry. Loading, empty, unavailable, and error states complete unspecified edge cases.
-- **Submission feedback:** Successful comments and replies show a green confirmation below the composer in the selected language, announced through a live status region. Starting another draft or reply clears the previous confirmation.
-- **Metadata:** A project title, description, and browser-tab icon were added as basic page metadata beyond the supplied design.
+</details>
 
-### Technical decisions
+## Lighthouse
 
-- **State and data:** React Context and a shared hook own session data, locale, loading, and submission state across routes. An in-memory repository clones the JSON seed and validates writes; comments and replies share a flat collection linked by record ID and parent ID. Successful writes update React state immutably. This scope does not need an additional state or data-fetching library.
-- **Component boundaries:** The composer, comment threads, state views, and shared UI controls are separate components; mock request behavior lives behind the repository boundary. Drafts and reply selection remain local to the page/form; changing records resets the composer.
-- **Localization:** Small English/Arabic dictionaries keep interface translations explicit without an i18n dependency. Locale controls document language/direction and date formatting; logical spacing and automatic text direction support mixed-language content. The selected language is saved in browser local storage and restored after refresh. If browser storage is unavailable, the selection lasts for the current visit. User-written comments remain in their original language.
-- **Accessibility:** Native controls, semantic headings, a skip link, visible focus, contextual control names, linked validation guidance, status/error announcements, and composer focus handling support keyboard and screen-reader use.
+The supplied runs scored 100 in Performance, Accessibility, Best Practices, and SEO for `/records` and `/records/record-003`. They were captured before the latest startup and feedback changes; rerun Lighthouse for current scores.
 
-### Assumptions and limitations
+<details>
+<summary>View the captured results</summary>
 
-- The seeded current user stands in for authentication. Data survives client-side navigation but resets on refresh; the language preference persists in browser local storage. There is no durable storage for comments, backend synchronization, pagination, or multi-user conflict handling.
-- Replies target root comments in the same record; counts include replies. Comment content is plain text, not HTML. Mock latency and one-time demo failures exercise recovery rather than model a production service.
-- Inferred screens and interactions are implementation choices, not additional supplied design specifications. Accessibility checks support the implementation but do not constitute a guarantee of full WCAG conformance across assistive technologies.
+![Records list Lighthouse results](docs/lighthouse/records.png)
 
-### Potential improvements
+![Record details Lighthouse results](docs/lighthouse/record-details.png)
 
-1. Add end-to-end checks for both languages, retry behavior, navigation, and responsive layouts.
-2. Validate keyboard and screen-reader behavior with VoiceOver on iOS and keyboard navigation on the web.
-3. If the sample grows, index users and replies by ID and add pagination; the supplied dataset does not require these optimizations.
+</details>
+
+## Implementation notes
+
+The PDF defines the scope, the JSON supplies the seed, and Figma provides the visual reference. The update list was inferred because the design supplied only the discussion screen. The shared reply composer and collapsible threads are implementation choices.
+
+React Context owns the session and language. A repository handles sample data, validation, and simulated requests. The composer, threads, state views, and UI controls are separate components. Small translation dictionaries cover the interface without an i18n library.
+
+## Limits and next steps
+
+Comments are plain text and session-only. There is no backend sync, pagination, or multi-user conflict handling. Automated accessibility checks and Lighthouse scores do not replace keyboard and screen-reader testing.
+
+Next steps would be end-to-end browser tests, further assistive-technology checks, and pagination if discussions grow.

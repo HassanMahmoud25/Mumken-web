@@ -7,7 +7,6 @@ import { createDiscussionRepository } from "./discussion.repository";
 import type { Comment, DiscussionRepository } from "./discussion.types";
 import RecordsPage from "../records/RecordsPage";
 
-// Render real React forms without introducing a testing-library dependency.
 vi.mock("next/link", () => ({ default: ({ children, ...props }: { children: ReactNode }) => <a {...props}>{children}</a> }));
 let container: HTMLDivElement;
 let root: Root;
