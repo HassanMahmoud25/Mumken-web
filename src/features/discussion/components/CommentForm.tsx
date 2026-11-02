@@ -85,7 +85,10 @@ export default function CommentForm({
       succeeded = await onSubmit(trimmedBody);
     } finally {
       pending.current = false;
-      requestAnimationFrame(() => textareaRef.current?.focus({ preventScroll: true }));
+      requestAnimationFrame(() => {
+        if (succeeded) textareaRef.current?.blur();
+        else textareaRef.current?.focus({ preventScroll: true });
+      });
     }
 
     if (succeeded) {
