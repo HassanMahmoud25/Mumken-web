@@ -14,8 +14,8 @@ describe("component-shaped skeletons", () => {
   it("uses record cards with a full-width action in the same grid", () => {
     const element = render("list");
     expect(element.querySelector('[role="status"][aria-busy="true"]')).not.toBeNull();
-    expect(element.querySelectorAll('[data-skeleton="record-card"]')).toHaveLength(2);
-    expect(element.querySelectorAll('[data-skeleton="record-action"]')).toHaveLength(2);
+    expect(element.querySelectorAll('[data-skeleton="record-card"]')).toHaveLength(4);
+    expect(element.querySelectorAll('[data-skeleton="record-action"]')).toHaveLength(4);
     expect(element.querySelector("textarea")).toBeNull();
     expect(element.querySelectorAll("a, button")).toHaveLength(0);
   });

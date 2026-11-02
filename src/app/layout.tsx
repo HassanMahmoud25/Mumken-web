@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { DiscussionProvider } from "@/features/discussion/DiscussionProvider";
+import StartupScreen from "@/components/ui/StartupScreen";
 
 export const metadata: Metadata = {
   title: "Mumken | Community Discussion",
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
-        <DiscussionProvider>{children}</DiscussionProvider>
+        <StartupScreen>
+          <DiscussionProvider>{children}</DiscussionProvider>
+        </StartupScreen>
       </body>
     </html>
   );

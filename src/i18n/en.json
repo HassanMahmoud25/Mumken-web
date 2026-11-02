@@ -24,6 +24,8 @@
   "unavailableDescription": "This update could not be found.",
   "submitError": "Comment was not posted. Your text is still here—please try again.",
   "replySubmitError": "Reply was not posted. Your text is still here—please try again.",
+  "commentSuccess": "Your comment was posted successfully.",
+  "replySuccess": "Your reply was posted successfully.",
   "emptyError": "Please write a comment before submitting.",
   "source": "Source",
   "published": "Published",

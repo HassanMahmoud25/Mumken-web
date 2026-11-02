@@ -176,10 +176,29 @@ describe("discussion journey", () => {
     await click("Post comment");
     expect(container.querySelector("textarea")?.value).toBe("My contribution");
     expect(container.querySelector('[role="alert"]')?.textContent).toContain("Comment was not posted");
+    expect(container.textContent).not.toContain("Your comment was posted successfully.");
     await click("Post comment");
     expect(container.querySelector("textarea")?.value).toBe("");
     expect(container.textContent).toContain("My contribution");
     expect(container.textContent).toContain("1 comments");
+    expect(container.querySelector('form [role="status"]')?.textContent).toBe("Your comment was posted successfully.");
+    await type("Another contribution");
+    expect(container.querySelector('form [role="status"]')?.textContent).toBe("");
+  });
+  it("announces reply success in both languages and clears it when starting a new reply", async () => {
+    await renderPage(createDiscussionRepository(), "record-001");
+    await clickReply("comment-001");
+    await type("A successful reply");
+    await click("Post reply");
+    expect(container.querySelector('form [role="status"]')?.textContent).toBe("Your reply was posted successfully.");
+    await click("文Aالعربية");
+    expect(container.querySelector('form [role="status"]')?.textContent).toBe("تم نشر ردك بنجاح.");
+    const reply = thread("comment-001").querySelector("button");
+    await act(async () => reply?.click());
+    expect(container.textContent).not.toContain("تم نشر ردك بنجاح.");
+    await type("رد جديد");
+    await click("نشر الرد");
+    expect(container.querySelector('form [role="status"]')?.textContent).toBe("تم نشر ردك بنجاح.");
   });
   it("announces submission in progress and inserts the result only once", async () => {
     const repository = createDiscussionRepository();

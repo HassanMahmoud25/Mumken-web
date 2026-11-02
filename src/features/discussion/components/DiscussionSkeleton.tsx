@@ -139,6 +139,8 @@ export default function DiscussionSkeleton({
           <div className={layout.recordGrid}>
             <RecordCardSkeleton first action={t.openRecord} locale={locale} />
             <RecordCardSkeleton action={t.openRecord} locale={locale} />
+            <RecordCardSkeleton action={t.openRecord} locale={locale} />
+            <RecordCardSkeleton action={t.openRecord} locale={locale} />
           </div>
         ) : (
           <div className="space-y-6">

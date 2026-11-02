@@ -15,6 +15,7 @@ import { useDiscussion } from "@/features/discussion/DiscussionProvider";
 import en from "@/i18n/en.json";
 import ar from "@/i18n/ar.json";
 import LocalizedTime from "@/components/ui/LocalizedTime";
+import { useStartupPlaceholder } from "@/components/ui/StartupScreen";
 
 const translations = { en, ar };
 
@@ -26,6 +27,7 @@ export default function RecordsPage({
   loadingDetail?: boolean;
 }) {
   const discussion = useDiscussion(recordId);
+  const startupPlaceholder = useStartupPlaceholder();
 
   const [replySelection, setReplySelection] = useState<{
     commentId: string;
@@ -33,7 +35,7 @@ export default function RecordsPage({
   const replyToId = replySelection?.commentId ?? null;
 
   const { locale, data, selectedRecord } = discussion;
-  const status = loadingDetail ? "loading" : discussion.status;
+  const status = loadingDetail || startupPlaceholder ? "loading" : discussion.status;
   const detailView = Boolean(recordId) || loadingDetail;
 
   const t = translations[locale];
@@ -74,6 +76,8 @@ export default function RecordsPage({
     submitError: replyToId ? t.replySubmitError : t.submitError,
     invalidReplyError: t.invalidReplyError,
     submitting: t.submitting,
+    commentSuccess: t.commentSuccess,
+    replySuccess: t.replySuccess,
   };
 
   const commentLabels = {

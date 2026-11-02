@@ -26,6 +26,8 @@ interface CommentFormProps {
     submitError: string;
     invalidReplyError: string;
     submitting: string;
+    commentSuccess: string;
+    replySuccess: string;
   };
   onSubmit: (body: string) => Promise<boolean>;
   onCancelReply?: () => void;
@@ -64,12 +66,15 @@ export default function CommentForm({
   const pending = useRef(false);
   const [body, setBody] = useState("");
   const [validationError, setValidationError] = useState(false);
+  const [success, setSuccess] = useState<"comment" | "reply" | null>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (pending.current || submitting) return;
+    setSuccess(null);
     const trimmedBody = body.trim();
+    const submissionKind = replyingTo ? "reply" : "comment";
 
     if (!trimmedBody) {
       setValidationError(true);
@@ -94,6 +99,7 @@ export default function CommentForm({
     if (succeeded) {
       setBody("");
       setValidationError(false);
+      setSuccess(submissionKind);
     }
   }
 
@@ -129,6 +135,7 @@ export default function CommentForm({
             variant="ghost"
             className="min-h-8 px-2 py-1 text-xs"
             onClick={() => {
+              setSuccess(null);
               onCancelReply?.();
               textareaRef.current?.focus({ preventScroll: true });
             }}
@@ -148,6 +155,7 @@ export default function CommentForm({
             onChange={(event) => {
               setBody(event.target.value.slice(0, MAX_LENGTH));
               setValidationError(false);
+              setSuccess(null);
               if (submitError) onClearError();
             }}
             placeholder={
@@ -191,9 +199,15 @@ export default function CommentForm({
             </Button>
           </div>
 
-          <span role="status" className="sr-only">
-            {submitting ? labels.submitting : ""}
-          </span>
+          <p
+            role="status"
+            aria-atomic="true"
+            className={success && !replySelection && !errorMessage && !submitting ? "mt-3 text-sm text-emerald-700" : "sr-only"}
+          >
+            {submitting ? labels.submitting : success && !replySelection && !errorMessage
+              ? success === "reply" ? labels.replySuccess : labels.commentSuccess
+              : ""}
+          </p>
           {errorMessage && (
             <p id={errorId} role="alert" className="mt-3 text-sm text-red-700">
               {errorMessage}
