@@ -25,6 +25,17 @@ export function useDiscussionState(
   const submittingRef = useRef(false);
   const loadVersion = useRef(0);
 
+  useEffect(() => {
+    try {
+      const savedLocale = localStorage.getItem("mumken-locale");
+      if (savedLocale === "en" || savedLocale === "ar") {
+        queueMicrotask(() => setLocale(savedLocale));
+      }
+    } catch {
+      // Language selection still works when browser storage is unavailable.
+    }
+  }, []);
+
   const load = useCallback(async () => {
     const version = ++loadVersion.current;
     setStatus("loading");
@@ -130,8 +141,14 @@ export function useDiscussionState(
   );
 
   const toggleLocale = useCallback(() => {
-    setLocale((current) => (current === "en" ? "ar" : "en"));
-  }, []);
+    const nextLocale = locale === "en" ? "ar" : "en";
+    setLocale(nextLocale);
+    try {
+      localStorage.setItem("mumken-locale", nextLocale);
+    } catch {
+      // Keep the selected language for this visit if persistence is blocked.
+    }
+  }, [locale]);
 
   return {
     data,

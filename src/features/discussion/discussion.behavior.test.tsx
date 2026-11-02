@@ -12,6 +12,7 @@ vi.mock("next/link", () => ({ default: ({ children, ...props }: { children: Reac
 let container: HTMLDivElement;
 let root: Root;
 beforeEach(() => {
+  localStorage.clear();
   Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true });
   Object.defineProperty(HTMLElement.prototype, "scrollIntoView", { configurable: true, value: vi.fn() });
   vi.stubGlobal("matchMedia", vi.fn().mockReturnValue(mediaQuery(false)));
